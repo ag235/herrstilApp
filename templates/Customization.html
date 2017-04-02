@@ -1,0 +1,278 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3  meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Herrstil Shoe Customization </title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <style>
+    .imageParent {
+      position: relative;
+      top: 0;
+      left: 0
+    }
+    .base{
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+    .overlay {
+      position: absolute;
+      top: -1.5px;
+      left: 0px;
+    }
+    .btn {
+      padding: 14px 24px;
+      border: 0 none;
+      font-weight: 400;
+      letter-spacing: .5px;
+    }
+    .btn:focus, .btn:active:focus, .btn.active:focus {
+      outline: 0 none;
+    }
+
+    .btn-primary {
+      background: #000000;
+      color: #ffffff;
+    }
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+      background: #ff8800;
+    }
+    .btn-primary:active, .btn-primary.active {
+      background: #000000;
+      box-shadow: none;
+    }
+    .panel > .panel-heading {
+      background-image: none;
+      background-color: white;
+      color: black;
+    }
+    ul.nav li a:hover, ul.nav li a:active {
+      color: #ff8800;
+    }
+
+    ul.nav li.active a {
+      color: #000000;
+    }
+
+    * {
+      border-radius: 0 !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    }
+    p, div {
+      font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div id="app">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col-sm-4">
+          <h1 class="text-center" >
+            <img src="/static/images/logo.png" class="img-responsive center-block" alt="logo"> 
+          </h1>
+        </div>
+        <div class="col-sm-4"></div>
+        <div style="display: inline" class="col-sm-4"> 
+          <span style="float:right;">
+            <img style="display: inline" src="/static/images/facebook.png" class="img-responsive" alt="logo">  
+            <img style="display: inline" src="/static/images/insta.png" class="img-responsive" alt="logo">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!--this is the shoe display-->
+      <div class="col-sm-8">
+        <div class = "imageParent" id = 'shoeImageContainer'>
+          <img v-bind:src="selectedStyleImg" class="img-responsive base" alt="">
+          <img v-bind:src="selectedUpperToeMaterialImg" v-bind:style="shoeStyle" class="img-responsive overlay"alt="">
+          <img v-bind:src="selectedUpperMidMaterialImg" v-bind:style="shoeStyle" class="img-responsive overlay"alt="">
+          <img v-bind:src="selectedMiddleShoeMaterialImg" v-bind:style="shoeStyle" class="img-responsive overlay"alt="">
+          <img v-bind:src="selectedSoleColorImg" v-bind:style="shoeStyle" class="img-responsive overlay"alt="">
+        </div>
+      </div>
+
+      <!--Side bar-->
+      <div class="col-sm-3">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Style 
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked">
+                  <li v-for ="style in styles">
+                    <div v-on:click = changeStyle(style.name)>
+                      <a href="#">{{style.name}}</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Upper Toe Material 
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked">
+
+                  <li v-for ="toeStyle in selectedStyleData.upperToeMaterial">
+                    <div v-on:click = "selectedUpperToeMaterial = toeStyle">
+                     <a href="#">{{materials[toeStyle].name}}</a>
+                   </div>
+                 </li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Upper Mid Material 
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <ul class="nav nav-pills nav-stacked">
+               <li v-for ="uMidStyle in selectedStyleData.upperMidMaterial"> 
+                <div v-on:click = "selectedUpperMidMaterial = uMidStyle">
+                 <a href="#">{{materials[uMidStyle].name}}</a>
+               </div>
+             </li>
+           </ul>
+         </div>
+       </div>
+     </div>
+     <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingFour">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Middle Shoe Material 
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+           <li v-for ="MidStyle in selectedStyleData.middleShoeMaterial">
+            <div v-on:click = "selectedMiddleShoeMaterial = MidStyle">
+              <a href="#">{{materials[MidStyle].name}}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Sole Color
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <ul class="nav nav-pills nav-stacked">
+         <li v-for ="sole in selectedStyleData.soleColor">
+           <div v-on:click = "selectedSoleColor = sole">
+             <a href="#">{{materials[sole].name}}</a>
+           </div>
+         </li> 
+       </ul>
+     </div>
+   </div>
+ </div>
+ <div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingSix">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+        Size 
+      </a>
+    </h4>
+  </div>
+  <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+    <div class="panel-body">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation"><a href="#">7</a></li>
+        <li role="presentation"><a href="#">8</a></li>
+        <li role="presentation"><a href="#">9</a></li>
+        <li role="presentation"><a href="#">10</a></li>
+        <li role="presentation"><a href="#">11</a></li>
+        <li role="presentation"><a href="#">12</a></li>
+        <li role="presentation"><a href="#">13</a></li>
+        <li role="presentation"><a href="#">Custom</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingSeven">
+    <h4 class="panel-title">
+      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+        Additional Colors 
+      </a>
+    </h4>
+  </div>
+  <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+    <div class="panel-body">
+      <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" v-on:click = "setHueSaturation(100, 100)"><a href="#">Green</a></li>
+        <li role="presentation" v-on:click = "setHueSaturation(240, 100)"><a href="#">Blue</a></li>
+        <li role="presentation" v-on:click = "setHueSaturation(330, 100)"><a href="#">Burgundy</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--button--> 
+<button type="button" class="btn btn-primary" v-on:click="sendOrder()"> Submit Order </button>
+</div>
+</div>
+</div>
+</div>
+<!--Javascript!-->
+<script type="text/javascript" src = "./static/js/jquery.js"> </script>
+<script src = "./static/js/bootstrap.js"></script>
+<script src = "./static/js/vue.js"></script>
+<script src="./static/js/vue-resource.min.js"></script>
+<script src="./static/js/html2canvas.js"></script>
+<script src="./static/js/customization.js"></script>
+</body>
+</html>

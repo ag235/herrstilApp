@@ -4,11 +4,13 @@
   "description": "app for seb",
   "main": "index.js",
   "scripts": {
-   	"start": "node index.js"
+    "start": "node index.js",
+    "db": "mongod --dbpath=data"
   },
   "author": "Anna Grosul",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2"
   }
 }

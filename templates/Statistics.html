@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Shoe Stats</title>
+	<!--Specifies the character ser : Unicode!-->
+	<meta charset="utf-8">
+	<!--sets to the width of the device!-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--download bootstrap!--> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	}
+	p, div {
+		font-family: "Myriad Pro", "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+	}
+	.nav-pills{
+		display:inline-block;
+	}
+
+</style>
+
+<body >
+	<div id = 'app' class = 'center-block' style = 'margin-top:5%'>
+		<div >
+			<h1 class="text-center"> Congratulations Your Order Has Been Placed! </h1>
+			<p class="text-center"> Take a look at how your shoe compares to the  3 most recent orders made by previous customers</p>
+		</div>
+		<div class="text-center">
+			<ul class="nav nav-pills">
+				<li v-for ="order in orders"> 
+					<!--{{order}}!-->
+					<image v-bind:src='order.image' width = "300" height ="200" style='display:inline'> </image>
+				</li>
+			</ul>
+		</div>
+		<div class="text-center">
+			<h2>{{percent | round}} % of our customers have the same design.</h2>
+			<p> We have currently had {{totalCount}} customized shoes out of 7.1 billion people in the world, who probably also wear shoes. You are unique!</p>
+		</div>
+		<div class='text-center'>
+		<a href="http://www.picgifs.com/graphics/"><img src="http://www.picgifs.com/graphics/w/walking/graphics-walking-412668.gif" border="0" style='display:inline'/></a>
+		</div>
+
+	</div>
+
+
+
+
+<!--JavaScript!-->
+ <script type="text/javascript" src = "./static/js/jquery.js"> </script>
+ <script src = "./static/js/bootstrap.js"></script>
+  <script src="./static/js/moment.js"></script>
+ <script src = "./static/js/vue.js"></script>
+ <script src="./static/js/vue-resource.min.js"></script>
+ <script src="./static/js/statistics.js"></script>
+</body>
+</html>
